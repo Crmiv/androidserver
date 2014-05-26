@@ -7,6 +7,8 @@
 #import useDeleteAccount
 
 import sys
+import MySQLdb
+
 sys.path.append('/home/junningliu/project/Sql/')
 from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
 from SocketServer import ThreadingMixIn
