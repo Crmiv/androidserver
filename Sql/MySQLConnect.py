@@ -1,12 +1,15 @@
 #!/usr/bin/env python
-#import MySQLdb
+import MySQLdb
 
-errorMessage = 'cannot connect database, please check it'
-try:
-	conn = MySQLdb.connect(host='localhost', user='userinfo', passwd='ljn7168396', db='androidservice', port=3306)
-	cur = conn.cursor()
-	#run sql
-	#cur.execute('')
-except MySQLdb.Error, e:
-	print errorMessage
-
+def conMySQL(user, passwd, db):
+	#connect function
+	errorMessage = 'cannot connect database, please check it'
+	try:
+		#gbk code-confuse,utf8?
+		conn = MySQLdb.connect(host='localhost', user, passwd, db, port=3306,charset='utf8')
+		cur = conn.cursor()
+		return cur
+		#run sql
+		#cur.execute('')
+	except MySQLdb.Error, e:
+		print errorMessage
