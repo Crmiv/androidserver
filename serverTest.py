@@ -13,13 +13,18 @@ class RequestHandler(BaseHTTPRequestHandler):
 	def do_HEAD(self):
 		self._writeheaders()
 	
-	def do_SOMETHING(self):
+	def do_A(self):
 		self._writeheaders()
-		self.wfile.write("""!!!""")
+		self.rfile(file("LIST"))
+		textcont = self.rfile.read()
+		print textcont
+		self.wfile.write(rfile)
 
 	def do_GET(self):
 		self._writeheaders()
-		self.wfile.write("""<html>nihao</html>""")
+		textcont = self.rfile.readline().strip()
+		self.wfile.write(textcont)
+
 class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
 	pass
 

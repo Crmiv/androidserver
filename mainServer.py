@@ -13,12 +13,17 @@ sys.path.append('/home/junningliu/project/Sql/')
 from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
 from SocketServer import ThreadingMixIn
 import time, threading
+
+#handle mysql operation
 import MySQLConnect
 import MySQLDisConnect
 import mediaStore
 import useAccoAuth
 import useAccoDataManage
-	
+
+class 
+
+#base handler
 class RequestHandler(BaseHTTPRequestHandler):
 	#to accomodate html
 	def _writeheaders(self, doc):
@@ -51,7 +56,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 	def do_HEAD(self):
 		data = #_getdata(self.name, self.password)
 		self._writeheaders(data)
-	
+
 	def do_GET(self):
 		data = self._getdata(self.name, self.password)
 		self._writeheaders(data)	
