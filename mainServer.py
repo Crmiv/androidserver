@@ -47,7 +47,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 		#if(!text)
 		#return text
 		#else return None
-	
+
 	def do_HEAD(self):
 		data = #_getdata(self.name, self.password)
 		self._writeheaders(data)
@@ -64,8 +64,8 @@ class RequestHandler(BaseHTTPRequestHandler):
 		#...
 		pass
 	#or use asynI/O, have no test
-	class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
-		pass
+class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
+	pass
 
 if __name__ == '__main__':
 	serveraddr = ('',3003)
