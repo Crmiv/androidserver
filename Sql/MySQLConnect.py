@@ -6,7 +6,7 @@ def conMySQL(user, passwd, db):
 	errorMessage = 'cannot connect database, please check it'
 	try:
 		#gbk code-confuse,utf8?
-		conn = MySQLdb.connect(host='localhost', user, passwd, db, port=3306,charset='utf8')
+		conn = MySQLdb.connect(host='localhost', user, passwd, db, port=3306, charset='utf8')
 		cur = conn.cursor()
 		return cur
 		#run sql

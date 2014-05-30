@@ -21,21 +21,22 @@ import mediaStore
 import useAccoAuth
 import useAccoDataManage
 
-class 
+#sqlhandle ,delete is no-use
+SQLHANDLE = [
+			 'saveUserInfo',
+			 'logout',
+		     'DeleteUser',
+			 'EditUserInfo',
+			 'getUserFriend',
+			 'getUserPhoto',
+			 'getUserVideo'
+			 ]
 
 #base handler
 class RequestHandler(BaseHTTPRequestHandler):
 	#to accomodate html
-	def _writeheaders(self, doc):
-		if doc is None:
-			self.send_response(404 not found)
-		else:
-			self.send_response(200)
-		#can use other data like json, xml
-		self.send_header('Content-type', 'text/html')
-		self.end_headers()
-	
 	def _getdata(self, username, password):
+		pass
 		#connect mysql
 		#from MySQLConnect
 
@@ -52,10 +53,44 @@ class RequestHandler(BaseHTTPRequestHandler):
 		#if(!text)
 		#return text
 		#else return None
+	def do_SQLSAVE(self):
+		global SQLHANDLE
+		sqlSyntax == self.rfile.readline()
+		if self.rfile.readline() == '':
+			self.send_response(400)
+			self.send_header("Content-type","text/html")
+			self.end_headers()
+
+		#SqlHandle List address in Sql/sqlhandle and global-vairable SQLHANDLE
+		else:
+			for sqlcontent in SQLHANDLE:
+				if sqlSyntax == sqlcontent:
+					self.send_response(200)
+					self.send_header("Content-type", "text/html")
+		 			self.end_headers()
+					#SQL handle
+
+
+
+				else :
+					self.send_response(400)
+					self.send_header("Content-type","text/html")
+					self.end_headers()
+					
+	
+	def do_SQLGET(self):
+		global SQLHANDLE
+		sqlSyntax == self.rfile.readline()
+		if self.rfile.readline() == '':
+			self.send_response(400)
+			self.send_header("Content-type","text/html")
+			self.end_headers()
+		
+
 
 	def do_HEAD(self):
-		data = #_getdata(self.name, self.password)
-		self._writeheaders(data)
+		#data = #_getdata(self.name, self.password)
+		#self._writeheaders(data)
 
 	def do_GET(self):
 		data = self._getdata(self.name, self.password)

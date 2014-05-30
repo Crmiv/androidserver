@@ -1,0 +1,13 @@
+SQLHandle:
+Login:
+  saveUserInfo
+  logout
+  DeleteUser
+PersonalInfo:
+  EditUserInfo
+Data:
+  getUserFriend
+  getUserPhoto
+  getUserVideo
+
+
