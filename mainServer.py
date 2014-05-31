@@ -15,8 +15,8 @@ from SocketServer import ThreadingMixIn
 import time, threading
 
 #handle mysql operation
-import MySQLConnect
-import MySQLDisConnect
+from MySQLConnect import conMySQL
+import MySQLDisConnect import disconMySQL
 import mediaStore
 import useAccoAuth
 import useAccoDataManage
@@ -68,10 +68,9 @@ class RequestHandler(BaseHTTPRequestHandler):
 					self.send_response(200)
 					self.send_header("Content-type", "text/html")
 		 			self.end_headers()
-					#SQL handle
-
-
-
+					#SQL Connect
+					conMySQL("userinfo", "ljn7168396", "userinfo")
+					
 				else :
 					self.send_response(400)
 					self.send_header("Content-type","text/html")

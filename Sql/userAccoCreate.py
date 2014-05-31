@@ -9,7 +9,9 @@ def createNewAccount(username, userpasswd, sex):
 	cur = MySQLConnect.conMySQL(user, passwd, db)
 	#exist user
 	value = ['NULL',username,userpasswd,'NULL',sex]
-	if(!findAccountExist(username)):
+	#search user existence
+	cur.execute('')
+	if(findresult):
 		#php-style
 		#cur.execute("INSERT INTO users VALUES (NULL, " + "'" + username + "'" + ", NULL, '" + sex + "'")
 		cur.execute('INSERT INTO users VALUES(%s,%s,%s,%s,%s)', value)
@@ -20,10 +22,5 @@ def createNewAccount(username, userpasswd, sex):
 	cur.close()
 	conn.close()
 
-def findAccountExist(username):
-	#if():
-	#	return True
-	#else:
-	#	return False
-	pass
+	
 	
