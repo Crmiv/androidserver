@@ -15,11 +15,7 @@ from SocketServer import ThreadingMixIn
 import time, threading
 
 #handle mysql operation
-from MySQLConnect import conMySQL
-import MySQLDisConnect import disconMySQL
-import mediaStore
-import useAccoAuth
-import useAccoDataManage
+import MySQLConnect 
 
 #sqlhandle ,delete is no-use
 SQLHANDLE = [

@@ -1,13 +1,13 @@
 create table userinfo(
 		id int unsigned not null auto_increment primary key,
 		cutename char(30) not null,
-		user char(30) not null,
+		username char(30) not null,
 		password char(18) not null,
 		sex char(2) not null,
 		years int unsigned not null,
 		create_date date not null,
 		edit_date date not null,
-		login_date date not null
+		login_date date 
 		);
 
 /*create user*/
