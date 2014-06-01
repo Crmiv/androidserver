@@ -1,0 +1,21 @@
+create table userinfo(
+		id int unsigned not null auto_increment primary key,
+		user char(30) not null,
+		password char(18) not null,
+		sex char(2) not null,
+		years int unsigned not null,
+		date date not null
+		);
+
+INSERT INTO userinfo (id,user,password,sex,years,time) values ('',user_,password_,sex_,years_,CURRENT_DATE);
+delete from userinfo where user = user_;
+update userinfo set user = _user where id = _id;
+
+create table frnd(
+		id int unsigned not null auto_increment,
+		name char(30) not null primary key,
+		sex char(2) not null,
+		years int unsigned not null
+		)
+
+
