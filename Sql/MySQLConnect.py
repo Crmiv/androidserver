@@ -25,7 +25,8 @@ def conMySQL():
 #empty value user, passwd, db
 #user = 
 #passwd =
-#db = 
+#db =
+
 def createNewAccount(cutename, username, userpasswd, sex, years):
 	
 	#return a connection
@@ -55,9 +56,29 @@ def createNewAccount(cutename, username, userpasswd, sex, years):
 		#cur.execute("INSERT INTO users VALUES (NULL, " + "'" + username + "'" + ", NULL, '" + sex + "'")
 		cur.execute('INSERT INTO 
 				     users 
-					 VALUES(%s,%s,%s,%s,%s)' 
-					 ,value
+					 VALUES(%s,%s,%s,%s,%s)' ,value
 					 )
+		
+
+		#IMPORTANT create new frnd table and feeling table
+		cur.execute('create table frnd_%s(
+		id int unsigned not null,
+		frndnum int unsigned not null auto_increment primary key,
+		frndid int unsigned not null
+		)',value[0])
+		
+		cur.execute(
+
+		'create table feeling_%s(
+				id int unsigned not null,
+				feelingnum int unsigned not null auto_increment primary key,
+				text varchar(108) not null,
+				image char(100) ,
+				video char(100),
+				add_time time not null
+			)',value[0]
+				)
+
 	else:
 		print "You should create another user and change
 		another username"
@@ -70,7 +91,7 @@ def createNewAccount(cutename, username, userpasswd, sex, years):
 
 
 #edit nickname
-def EditAccountCutename(cutename, username, userpasswd):
+def editAccountCutename(cutename, username, userpasswd):
 	
 	conn = conMySQL()
 	cur = conn.cursor()
@@ -81,23 +102,22 @@ def EditAccountCutename(cutename, username, userpasswd):
 		cur.execute('
 		UPDATE userinfo SET cutename = %s WHERE 
 		username = %s', cutename, username)
-		conn.commit()
 		
 		#update edit-time
 		cur.execute('
 		UPDATE userinfo SET edit_date = CURRENT_DATE 
 		WHERE username = %s', username
 				)
-		conn.commit()
 	else:
 		print "you input wrong username or password, 
 		please try again"
 	
+	conn.commit()
 	cur.close()
 	conn.close()
 
 
-def EditAccountYears(years, username, userpasswd):
+def editAccountYears(years, username, userpasswd):
 	
 	conn = conMySQL()
 	cur = conn.cursor()
@@ -108,23 +128,23 @@ def EditAccountYears(years, username, userpasswd):
 		cur.execute('
 		UPDATE userinfo SET years = %i WHERE 
 		username = %s', years, username)
-		conn.commit()
 		
 		#update edit-time
 		cur.execute('
 		UPDATE userinfo SET edit_date = CURRENT_DATE 
 		WHERE username = %s', username
 				)
-		conn.commit()
+	
 	else:
 		print "you input wrong username or password, 
 		please try again"
 	
+	conn.commit()
 	cur.close()
 	conn.close()
 
 
-def EditAccountPassword(password, username, userpasswd):
+def editAccountPassword(password, username, userpasswd):
 	
 	conn = conMySQL()
 	cur = conn.cursor()
@@ -136,18 +156,56 @@ def EditAccountPassword(password, username, userpasswd):
 		cur.execute('
 		UPDATE userinfo SET password = %s WHERE 
 		username = %s', password, username)
-		conn.commit()
 		
 		#update edit-time
 		cur.execute('
 		UPDATE userinfo SET edit_date = CURRENT_DATE 
 		WHERE username = %s', username
 				)
-		conn.commit()
 	else:
 		print "you input wrong username or password, 
 		please try again"
 	
+	conn.commit()
+	cur.close()
+	conn.close()
+
+#duality relationship ,a->b and a<-b
+def addFriend(userid, frndid):
+	conn = conMySQL()
+	cur = conn.cursor()
+	cur.execute('SELECT * FROM frnd_%s WHERE frndid = %d', userid, frndid )
+	findresult1 = cur.fetchall()
+	cur.execute('SELECT * FROM frnd_%s WHERE frndid = %d', frndid, userid)
+	findresult2 = cur.fetchall()
+	if (not findresult1) and (not findresult2):
+		
+		cur.execute('
+			INSERT INTO frnd_%s	(id, frndnum, frndid) va	lues 	(%s, '', %s)
+		', userid, userid, frndid)
+		cur.execute('
+		INSERT INTO frnd_%s	(id, frndnum, frndid) values 	(%s, '', %s)
+		', frndid, frndid, userid)
+	else:
+		print "You are already friends"
+	conn.commit()
+	cur.close()
+	conn.close()
+
+#find friend
+def searchFriend():
+	conn = conMySQL()
+	cur = conn.cursor()
+
+	conn.commit()
+	cur.close()
+	conn.close()
+
+def deleteFriend(userid, frndid):
+	conn = conMySQL()
+	cur = conn.cursor()
+	
+	conn.commit()
 	cur.close()
 	conn.close()
 
